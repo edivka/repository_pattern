@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.539
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01.domain", "01.domain", "{224C5B4C-E282-4BEA-87CC-CE78DA53C49A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "northwind.domain", "northwind.domain\northwind.domain.csproj", "{4EFC533B-7476-4490-847F-93C8DDFA0DC4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02.repositories", "02.repositories", "{AD6673F1-A836-4BEC-97FC-D916B0E10409}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "northwind.repositories", "northwind.repositories\northwind.repositories.csproj", "{9D76ABF3-8D5C-46BA-9309-A50649E14994}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "northwind.repositories.nhibernate", "northwind.repositories.nhibernate\northwind.repositories.nhibernate.csproj", "{52A56822-2F46-4DAC-9191-621BE654F162}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03.clients", "03.clients", "{9023A239-DC18-4405-BCCA-4A74F47408A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "northwind.clients.console", "northwind.clients.console\northwind.clients.console.csproj", "{2E5DA66D-73D5-4918-A767-204465F73594}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4EFC533B-7476-4490-847F-93C8DDFA0DC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EFC533B-7476-4490-847F-93C8DDFA0DC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EFC533B-7476-4490-847F-93C8DDFA0DC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EFC533B-7476-4490-847F-93C8DDFA0DC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D76ABF3-8D5C-46BA-9309-A50649E14994}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D76ABF3-8D5C-46BA-9309-A50649E14994}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D76ABF3-8D5C-46BA-9309-A50649E14994}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D76ABF3-8D5C-46BA-9309-A50649E14994}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52A56822-2F46-4DAC-9191-621BE654F162}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52A56822-2F46-4DAC-9191-621BE654F162}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52A56822-2F46-4DAC-9191-621BE654F162}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52A56822-2F46-4DAC-9191-621BE654F162}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E5DA66D-73D5-4918-A767-204465F73594}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E5DA66D-73D5-4918-A767-204465F73594}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E5DA66D-73D5-4918-A767-204465F73594}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E5DA66D-73D5-4918-A767-204465F73594}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4EFC533B-7476-4490-847F-93C8DDFA0DC4} = {224C5B4C-E282-4BEA-87CC-CE78DA53C49A}
+		{9D76ABF3-8D5C-46BA-9309-A50649E14994} = {AD6673F1-A836-4BEC-97FC-D916B0E10409}
+		{52A56822-2F46-4DAC-9191-621BE654F162} = {AD6673F1-A836-4BEC-97FC-D916B0E10409}
+		{2E5DA66D-73D5-4918-A767-204465F73594} = {9023A239-DC18-4405-BCCA-4A74F47408A1}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {22515DAB-341A-43DB-B37F-71BFF9F2244A}
+	EndGlobalSection
+EndGlobal

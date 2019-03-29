@@ -1,0 +1,11 @@
+/.vs
+/src/northwind.clients.console/bin
+/src/northwind.clients.console/obj
+/src/northwind.clients.console/*.user
+/src/northwind.domain/bin
+/src/northwind.domain/obj
+/src/northwind.repositories/bin
+/src/northwind.repositories/obj
+/src/northwind.repositories.nhibernate/bin
+/src/northwind.repositories.nhibernate/obj
+/src/.vs/repository_pattern/v15
