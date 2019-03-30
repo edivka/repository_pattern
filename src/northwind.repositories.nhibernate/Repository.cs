@@ -21,21 +21,24 @@ namespace northwind.repositories.nhibernate
         public T Add(T item)
         {
             this._session.Save(item);
-            this._session.Flush();
+            if (this._session.Transaction.IsActive)
+                this._session.Flush();
             return item;
         }
 
         public T Save(T item)
         {
             this._session.Update(item);
-            this._session.Flush();
+            if (this._session.Transaction.IsActive)
+                this._session.Flush();
             return item;
         }
 
         public void Delete(T item)
         {
             this._session.Delete(item);
-            this._session.Flush();
+            if (this._session.Transaction.IsActive)
+                this._session.Flush();
         }
 
         public T Get(int id)

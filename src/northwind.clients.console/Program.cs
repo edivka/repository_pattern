@@ -14,13 +14,14 @@ namespace northwind.clients.console
     class Program
     {
 
-        protected static ISessionFactory _sessionFactory { get; set; }
+        protected static INorthwindUnitOfWork _unitOfWork { get; set; }
 
         static void Main(string[] args)
         {
             CommandLineArgs parameter = new CommandLineArgs();
 
-            _sessionFactory = SessionFactory.BuildNHibernateSessionFactory();
+            ISessionFactory sessionFactory = SessionFactory.BuildNHibernateSessionFactory();
+            _unitOfWork = new NorthwindUnitOfWork(sessionFactory.OpenSession());
 
             if (parameter.ContainsKey("list"))
                 ListCatalog(parameter["list"]);
@@ -55,11 +56,9 @@ namespace northwind.clients.console
         {
             string employeeData = File.ReadAllText("data/Employees.json");
             var employee = JsonConvert.DeserializeObject<Employee>(employeeData);
-            using (var employeeRepository = new Repository<Employee>(_sessionFactory.OpenSession()))
-            {
-                employeeRepository.Add(employee);
-                Console.WriteLine($"Employee {employee.EmployeeID} created");
-            }
+            _unitOfWork.Employees.Add(employee);
+            _unitOfWork.Commit();
+            Console.WriteLine($"Employee {employee.EmployeeID} created");
         }
 
         private static void DeleteEntity(object entityKey)
@@ -69,22 +68,14 @@ namespace northwind.clients.console
 
         private static void ListOrders()
         {
-            using (var ordersRepository = new Repository<Order>(_sessionFactory.OpenSession()))
-            {
-                var allOrders = ordersRepository.Get();
-                foreach (var order in allOrders)
-                    Console.WriteLine($"Order: {order.OrderID} for customer {order.Customer.CompanyName}");
-            }
+            foreach (var order in _unitOfWork.Orders.Get())
+                Console.WriteLine($"Order: {order.OrderID} for customer {order.Customer.CompanyName}");
         }
 
         private static void ListCustomer()
         {
-            using (var ordersRepository = new Repository<Customer>(_sessionFactory.OpenSession()))
-            {
-                var allCustomers = ordersRepository.Get();
-                foreach (var customer in allCustomers)
-                    Console.WriteLine($"Customer {customer.CompanyName}. Contact name {customer.ContactName}");
-            }
+            foreach (var customer in _unitOfWork.Customers.Get())
+                Console.WriteLine($"Customer {customer.CompanyName}. Contact name {customer.ContactName}");
         }
     }
 }

@@ -64,11 +64,13 @@
   <ItemGroup>
     <Compile Include="CustomerMapper.cs" />
     <Compile Include="EmployeeMapper.cs" />
+    <Compile Include="INorthwindUnitOfWork.cs" />
     <Compile Include="OrderMapper.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="SessionFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShipperMapper.cs" />
+    <Compile Include="NorthwindUnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\northwind.domain\northwind.domain.csproj">
