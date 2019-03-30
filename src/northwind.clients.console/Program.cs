@@ -55,10 +55,9 @@ namespace northwind.clients.console
         {
             string employeeData = File.ReadAllText("data/Employees.json");
             var employee = JsonConvert.DeserializeObject<Employee>(employeeData);
-            using (var session = _sessionFactory.OpenSession())
+            using (var employeeRepository = new Repository<Employee>(_sessionFactory.OpenSession()))
             {
-                session.Save(employee);
-                session.Flush();
+                employeeRepository.Add(employee);
                 Console.WriteLine($"Employee {employee.EmployeeID} created");
             }
         }
@@ -70,9 +69,9 @@ namespace northwind.clients.console
 
         private static void ListOrders()
         {
-            using (var session = _sessionFactory.OpenSession())
+            using (var ordersRepository = new Repository<Order>(_sessionFactory.OpenSession()))
             {
-                var allOrders = session.Query<Order>();
+                var allOrders = ordersRepository.Get();
                 foreach (var order in allOrders)
                     Console.WriteLine($"Order: {order.OrderID} for customer {order.Customer.CompanyName}");
             }
@@ -80,9 +79,9 @@ namespace northwind.clients.console
 
         private static void ListCustomer()
         {
-            using (var session = _sessionFactory.OpenSession())
+            using (var ordersRepository = new Repository<Customer>(_sessionFactory.OpenSession()))
             {
-                var allCustomers = session.Query<Customer>();
+                var allCustomers = ordersRepository.Get();
                 foreach (var customer in allCustomers)
                     Console.WriteLine($"Customer {customer.CompanyName}. Contact name {customer.ContactName}");
             }
