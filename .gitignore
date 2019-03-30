@@ -9,3 +9,5 @@
 /src/northwind.repositories.nhibernate/bin
 /src/northwind.repositories.nhibernate/obj
 /src/.vs/repository_pattern/v15
+/src/packages
+/src/.vs/config

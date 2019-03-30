@@ -1,5 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using NHibernate;
+using northwind.domain;
+using northwind.repositories.nhibernate;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,9 +13,15 @@ namespace northwind.clients.console
 {
     class Program
     {
+
+        protected static ISessionFactory _sessionFactory { get; set; }
+
         static void Main(string[] args)
         {
             CommandLineArgs parameter = new CommandLineArgs();
+
+            _sessionFactory = SessionFactory.BuildNHibernateSessionFactory();
+
             if (parameter.ContainsKey("list"))
                 ListCatalog(parameter["list"]);
             else if (parameter.ContainsKey("create"))
@@ -21,18 +32,35 @@ namespace northwind.clients.console
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Invalid parameters... press a key to end");
-                Console.ReadKey();
             }
+
+            Console.ReadKey();
+
         }
 
         private static void ListCatalog(string catalogName)
         {
-            throw new NotImplementedException();
+            switch (catalogName.Trim().ToLower())
+            {
+                case "orders":
+                    ListOrders();
+                    break;
+                case "customer":
+                    ListCustomer();
+                    break;
+            }
         }
 
         private static void CreateEntity(string entityType)
         {
-            throw new NotImplementedException();
+            string employeeData = File.ReadAllText("data/Employees.json");
+            var employee = JsonConvert.DeserializeObject<Employee>(employeeData);
+            using (var session = _sessionFactory.OpenSession())
+            {
+                session.Save(employee);
+                session.Flush();
+                Console.WriteLine($"Employee {employee.EmployeeID} created");
+            }
         }
 
         private static void DeleteEntity(object entityKey)
@@ -40,5 +68,24 @@ namespace northwind.clients.console
             throw new NotImplementedException();
         }
 
+        private static void ListOrders()
+        {
+            using (var session = _sessionFactory.OpenSession())
+            {
+                var allOrders = session.Query<Order>();
+                foreach (var order in allOrders)
+                    Console.WriteLine($"Order: {order.OrderID} for customer {order.Customer.CompanyName}");
+            }
+        }
+
+        private static void ListCustomer()
+        {
+            using (var session = _sessionFactory.OpenSession())
+            {
+                var allCustomers = session.Query<Customer>();
+                foreach (var customer in allCustomers)
+                    Console.WriteLine($"Customer {customer.CompanyName}. Contact name {customer.ContactName}");
+            }
+        }
     }
 }
